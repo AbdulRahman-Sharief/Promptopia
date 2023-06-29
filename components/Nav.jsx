@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -39,7 +39,7 @@ const Nav = () => {
             <button type="button" onClick={signOut} className="outline_btn">
               Sign Out
             </button>
-            <Link href="/profile">
+            <Link href="/profile?user=My">
               <Image
                 src={session?.user.image}
                 width={30}
@@ -121,7 +121,9 @@ const Nav = () => {
                     signIn(provider.id);
                   }}
                   className="black_btn"
-                ></button>
+                >
+                  Sign In
+                </button>
               ))}
           </>
         )}

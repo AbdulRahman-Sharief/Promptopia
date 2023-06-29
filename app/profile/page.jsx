@@ -2,17 +2,31 @@
 
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import Profile from '@components/Profile';
 
-const MyProfile = () => {
+const UserProfile = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const username = searchParams.get('user');
   const [posts, setPosts] = useState([]);
   const { data: session } = useSession();
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/posts`);
+      // username == 'My'
+      //     ? await fetch(`/api/users/${session?.user.id}/posts`)
+      //     :
+      // console.log(session?.user.name.toString().replace(' ', '').toLowerCase());
+      console.log(session?.user);
+      console.log(session?.user.name.replace(/\s/g, '').toLowerCase());
+      const response = await fetch(
+        `/api/users/${
+          username == 'My'
+            ? session?.user.name.replace(/\s/g, '').toLowerCase()
+            : username
+        }/posts`
+      );
       const data = await response.json();
 
       setPosts(data);
@@ -44,8 +58,16 @@ const MyProfile = () => {
   };
   return (
     <Profile
-      name="My"
-      desc="Welcome to your Personalized profile page."
+      name={
+        username == session?.user.name.replace(/\s/g, '').toLowerCase()
+          ? 'My'
+          : username
+      }
+      desc={`Welcome to ${
+        username == 'My' || session?.user.name.replace(/\s/g, '').toLowerCase()
+          ? 'your'
+          : username
+      } profile page.`}
       data={posts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
@@ -53,4 +75,4 @@ const MyProfile = () => {
   );
 };
 
-export default MyProfile;
+export default UserProfile;
