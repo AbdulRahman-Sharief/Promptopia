@@ -36,6 +36,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 I want to implement:
-[1] Search
+[1] Search => #DONE
 [2] click on tags
 [3] view others profiles

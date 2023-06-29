@@ -1,30 +1,47 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import PromptCard from "./PromptCard";
+import { useEffect, useState } from 'react';
+import PromptCard from './PromptCard';
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data, handleTagClick, searchText }) => {
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((post) => (
-        <PromptCard
-          key={post._id}
-          post={post}
-          handleTagClick={handleTagClick}
-        />
-      ))}
+      {searchText
+        ? data.map((post) => {
+            if (
+              post.creator.username.includes(searchText) ||
+              post.tag.includes(searchText)
+            ) {
+              return (
+                <PromptCard
+                  key={post._id}
+                  post={post}
+                  handleTagClick={handleTagClick}
+                />
+              );
+            }
+          })
+        : data.map((post) => (
+            <PromptCard
+              key={post._id}
+              post={post}
+              handleTagClick={handleTagClick}
+            />
+          ))}
     </div>
   );
 };
 
 const Feed = () => {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const [posts, setPosts] = useState([]);
-  const handleSearchChange = (e) => {};
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/prompt");
+      const response = await fetch('/api/prompt');
       const data = await response.json();
       setPosts(data);
     };
@@ -43,7 +60,11 @@ const Feed = () => {
           className="search_input peer"
         ></input>
       </form>
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      <PromptCardList
+        data={posts}
+        searchText={searchText}
+        handleTagClick={() => {}}
+      />
     </section>
   );
 };
