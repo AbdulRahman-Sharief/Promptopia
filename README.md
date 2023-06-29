@@ -37,5 +37,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 I want to implement:
 [1] Search => #DONE
-[2] click on tags
+[2] click on tags => #DONE
 [3] view others profiles

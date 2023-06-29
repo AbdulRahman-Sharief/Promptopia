@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 
-const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+const PromptCard = ({ post, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState('');
   const { data: session } = useSession();
   const pathName = usePathname();
@@ -15,6 +15,11 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     setTimeout(() => {
       setCopied('');
     }, 3000);
+  };
+
+  const handleTagClick = async () => {
+    router.push(`/posts?tag=${post.tag.slice(1)}`);
+    console.log(post.tag.slice(1));
   };
   return (
     <div className="prompt_card ">
