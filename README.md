@@ -57,25 +57,52 @@ NEXTAUTH_SECRET=
 The following API endpoints are available:
 
 - POST /api/prompt/new :
+
 Create new prompt.
 
+
+
 - GET /api/users/${session.user.id}/posts:
+
 Get all posts for the user.
 
-- GET /api/users/${params?.id}/posts:
+
+
+- GET /api/prompt/tag/${params.tag}/:
+
+Get all posts ralated to the tag you cllicked on.
+
+
+
+- GET /api/users/${username}/posts:
+
 Get all posts of the user on the user`s profile.
 
+
+
 - GET /api/prompt/${promptId}
+
 Get prompt.
 
+
+
 - PATCH /api/prompt/${promptId}
+
 Update prompt.
 
-- GET  /api/prompts/${project}/prompts
+
+
+- GET /api/prompt
+
 Get all prompts.
 
+
+
 - DELETE /api/prompt/${post._id.toString()}
+
 Delete prompt.
+
+
 
 ## Error Handling
 
