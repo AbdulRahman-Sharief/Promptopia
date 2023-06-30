@@ -2,7 +2,7 @@
 
 Promptopia is an open-source AI prompting fullstack tool for the modern world. It provides users with the ability to discover, create, and share creative prompts to inspire their writing, brainstorming sessions, and creative projects. Uses tailwindcss for styling. This README file will guide you through the features, setup, and deployment process for Promptopia app. 
 
-##LIVE PREVIEW 
+## LIVE PREVIEW 
 https://promptopia-theta-gules.vercel.app/
 
 ## Features
